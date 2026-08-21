@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 
+import { StyledSelect } from "@/components/ui/StyledSelect";
+
 const SAMPLE_JSON = '{\n  "name": "Toolbench",\n  "tools": ["SIP Calculator", "JSON Formatter"]\n}';
 
 export function JsonFormatter() {
@@ -63,11 +65,16 @@ export function JsonFormatter() {
       <section className="tool-panel json-panel">
         <div className="formatter-toolbar">
           <label htmlFor="json-indent">Indent</label>
-          <select id="json-indent" value={indent} onChange={(event) => setIndent(Number(event.target.value))}>
-            <option value={2}>2 spaces</option>
-            <option value={4}>4 spaces</option>
-            <option value={0}>Compact</option>
-          </select>
+          <StyledSelect
+            id="json-indent"
+            value={String(indent)}
+            onChange={(value) => setIndent(Number(value))}
+            options={[
+              { value: "2", label: "2 spaces" },
+              { value: "4", label: "4 spaces" },
+              { value: "0", label: "Compact" },
+            ]}
+          />
           <button type="button" className="tool-button secondary" onClick={() => setInput("")}>Clear</button>
           <button type="button" className="tool-button" onClick={copyOutput} disabled={!result.output}>
             {copied ? "Copied" : "Copy"}
