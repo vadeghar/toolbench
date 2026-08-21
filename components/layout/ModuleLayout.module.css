@@ -303,9 +303,48 @@
 .moduleLayout :global(.formatter-toolbar select) {
   width: auto;
   min-width: 110px;
-  padding: 0 10px;
+  padding: 0 42px 0 14px;
   border: 1px solid var(--border-strong);
-  border-radius: 8px;
+  border-radius: 10px;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font: 500 0.95rem var(--font-body);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%), linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
+  background-position: calc(100% - 19px) 19px, calc(100% - 13px) 19px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.moduleLayout :global(.formatter-toolbar select:hover) {
+  border-color: var(--accent-violet);
+}
+
+.moduleLayout :global(.formatter-toolbar select:focus),
+.moduleLayout :global(.formatter-toolbar select:focus-visible) {
+  border-color: var(--accent-violet);
+  outline: 2px solid rgba(155, 141, 232, 0.22);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 1px var(--accent-violet);
+}
+
+.moduleLayout :global(.formatter-toolbar select:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.moduleLayout :global(.formatter-toolbar select option) {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font: 500 0.95rem var(--font-body);
+}
+
+.moduleLayout :global(.formatter-toolbar select option:checked) {
+  background: var(--accent-violet);
+  color: #fff;
 }
 
 .moduleLayout :global(.tool-button) {
