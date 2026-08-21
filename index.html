@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toolbench — Every tool you reach for</title>
+<meta name="description" content="Free online calculators, converters, generators and checkers. No sign-up, no clutter, just fast tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12161D;
+    --bg-elevated:#1A2028;
+    --bg-elevated-hover:#212832;
+    --border:#2A3240;
+    --border-strong:#3A4454;
+    --text-primary:#EDF0F4;
+    --text-secondary:#9AA5B4;
+    --text-tertiary:#6B7686;
+    --accent-brass:#E3A542;
+    --accent-teal:#4FB3A9;
+    --accent-violet:#9B8DE8;
+    --accent-coral:#E28168;
+    --radius:14px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(154,165,180,0.10) 1px, transparent 0);
+    background-size:26px 26px;
+    color:var(--text-primary);
+    font-family:var(--font-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{
+    max-width:1240px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(18,22,29,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:68px;
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:-0.01em;
+  }
+
+  .logo svg{display:block;}
+
+  nav.primary-nav{
+    display:flex;
+    gap:28px;
+  }
+
+  nav.primary-nav a{
+    font-size:0.92rem;
+    font-weight:500;
+    color:var(--text-secondary);
+    transition:color 0.15s ease;
+    padding:6px 0;
+    border-bottom:2px solid transparent;
+  }
+  nav.primary-nav a:hover{color:var(--text-primary);}
+  nav.primary-nav a[data-cat="calc"]:hover{border-color:var(--accent-brass);}
+  nav.primary-nav a[data-cat="conv"]:hover{border-color:var(--accent-coral);}
+  nav.primary-nav a[data-cat="gen"]:hover{border-color:var(--accent-violet);}
+  nav.primary-nav a[data-cat="check"]:hover{border-color:var(--accent-teal);}
+
+  .menu-btn{
+    display:none;
+    background:none;
+    border:1px solid var(--border-strong);
+    border-radius:8px;
+    width:40px;
+    height:40px;
+    color:var(--text-primary);
+    cursor:pointer;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .mobile-nav{
+    display:none;
+    flex-direction:column;
+    border-bottom:1px solid var(--border);
+    background:var(--bg-elevated);
+  }
+  .mobile-nav.open{display:flex;}
+  .mobile-nav a{
+    padding:14px 24px;
+    border-bottom:1px solid var(--border);
+    font-size:0.95rem;
+    color:var(--text-secondary);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:72px 0 56px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--accent-brass);
+    background:rgba(227,165,66,0.08);
+    border:1px solid rgba(227,165,66,0.25);
+    padding:5px 12px;
+    border-radius:100px;
+    margin-bottom:24px;
+  }
+
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.1;
+    margin-bottom:16px;
+  }
+
+  .hero h1 span{color:var(--text-tertiary);}
+
+  .hero p.sub{
+    color:var(--text-secondary);
+    font-size:1.05rem;
+    max-width:520px;
+    margin:0 auto 40px;
+  }
+
+  /* Command-bar search: the thesis of the page */
+  .search-shell{
+    max-width:640px;
+    margin:0 auto;
+    position:relative;
+  }
+
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:var(--bg-elevated);
+    border:1px solid var(--border-strong);
+    border-radius:16px;
+    padding:16px 20px;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+    transition:border-color 0.15s ease;
+  }
+  .search-box:focus-within{border-color:var(--accent-brass);}
+
+  .search-box svg{flex-shrink:0; color:var(--text-tertiary);}
+
+  .search-box input{
+    flex:1;
+    background:none;
+    border:none;
+    outline:none;
+    color:var(--text-primary);
+    font-family:var(--font-body);
+    font-size:1rem;
+  }
+  .search-box input::placeholder{color:var(--text-tertiary);}
+
+  .kbd{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--text-tertiary);
+    border:1px solid var(--border-strong);
+    border-radius:6px;
+    padding:3px 7px;
+  }
+
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-top:20px;
+  }
+
+  .chip{
+    font-size:0.82rem;
+    font-family:var(--font-mono);
+    color:var(--text-secondary);
+    border:1px solid var(--border);
+    padding:7px 14px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:all 0.15s ease;
+    background:var(--bg-elevated);
+  }
+  .chip:hover{border-color:var(--border-strong); color:var(--text-primary);}
+
+  /* ---------- Category sections ---------- */
+  .category-section{
+    padding:48px 0;
+    border-top:1px solid var(--border);
+  }
+
+  .cat-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:28px;
+  }
+
+  .cat-dot{
+    width:10px;
+    height:10px;
+    border-radius:3px;
+    flex-shrink:0;
+  }
+
+  .cat-head h2{
+    font-family:var(--font-display);
+    font-size:1.4rem;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .cat-head span.count{
+    color:var(--text-tertiary);
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+  }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+  }
+
+  .tool-card{
+    position:relative;
+    background:var(--bg-elevated);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px 20px 20px;
+    overflow:hidden;
+    transition:transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .tool-card::before{
+    content:"";
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:3px;
+  }
+
+  /* peg holes signature detail */
+  .tool-card::after{
+    content:"";
+    position:absolute;
+    top:12px; right:16px;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--border-strong);
+    box-shadow:-14px 0 0 0 var(--bg), -14px 0 0 1px var(--border-strong);
+  }
+
+  .tool-card.active:hover{
+    transform:translateY(-3px);
+    background:var(--bg-elevated-hover);
+  }
+
+  .tool-card.disabled{opacity:0.5; cursor:not-allowed;}
+
+  .tool-card[data-cat="calc"]::before{background:var(--accent-brass);}
+  .tool-card[data-cat="conv"]::before{background:var(--accent-coral);}
+  .tool-card[data-cat="gen"]::before{background:var(--accent-violet);}
+  .tool-card[data-cat="check"]::before{background:var(--accent-teal);}
+
+  .tool-card[data-cat="calc"].active:hover{border-color:var(--accent-brass);}
+  .tool-card[data-cat="conv"].active:hover{border-color:var(--accent-coral);}
+  .tool-card[data-cat="gen"].active:hover{border-color:var(--accent-violet);}
+  .tool-card[data-cat="check"].active:hover{border-color:var(--accent-teal);}
+
+  .tool-card h3{
+    font-family:var(--font-display);
+    font-size:1rem;
+    font-weight:600;
+    margin-bottom:6px;
+    padding-right:14px;
+  }
+
+  .tool-card p{
+    font-size:0.85rem;
+    color:var(--text-secondary);
+    margin-bottom:14px;
+  }
+
+  .tool-card .tag{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    color:var(--text-tertiary);
+  }
+
+  .soon-badge{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    color:var(--text-tertiary);
+    border:1px solid var(--border-strong);
+    padding:2px 8px;
+    border-radius:100px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--border);
+    padding:40px 0;
+    margin-top:24px;
+  }
+  footer .wrap{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+  }
+  footer p{color:var(--text-tertiary); font-size:0.85rem;}
+  footer .foot-links{display:flex; gap:20px;}
+  footer .foot-links a{color:var(--text-tertiary); font-size:0.85rem;}
+  footer .foot-links a:hover{color:var(--text-secondary);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .card-grid{grid-template-columns:repeat(3, 1fr);}
+  }
+
+  @media (max-width:768px){
+    nav.primary-nav{display:none;}
+    .menu-btn{display:flex;}
+    .card-grid{grid-template-columns:repeat(2, 1fr);}
+    .hero{padding:48px 0 40px;}
+  }
+
+  @media (max-width:480px){
+    .card-grid{grid-template-columns:1fr;}
+    .search-box{padding:14px 16px;}
+    .kbd{display:none;}
+    footer .wrap{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <rect x="2" y="2" width="22" height="22" rx="6" stroke="#E3A542" stroke-width="1.6"/>
+        <circle cx="9" cy="9" r="1.6" fill="#4FB3A9"/>
+        <circle cx="17" cy="9" r="1.6" fill="#9B8DE8"/>
+        <circle cx="9" cy="17" r="1.6" fill="#E28168"/>
+        <circle cx="17" cy="17" r="1.6" fill="#E3A542"/>
+      </svg>
+      Toolbench
+    </a>
+    <nav class="primary-nav">
+      <a href="#calculators" data-cat="calc">Calculators</a>
+      <a href="#converters" data-cat="conv">Converters</a>
+      <a href="#generators" data-cat="gen">Generators</a>
+      <a href="#checkers" data-cat="check">Checkers</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4.5H16M2 9H16M2 13.5H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#calculators">Calculators</a>
+  <a href="#converters">Converters</a>
+  <a href="#generators">Generators</a>
+  <a href="#checkers">Checkers</a>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">◆ 100% free · no sign-up</span>
+    <h1>Every tool you reach for.<br><span>None of the noise.</span></h1>
+    <p class="sub">Calculators, converters, generators and checkers that load instantly and work in your browser — nothing to install, nothing to sign up for.</p>
+
+    <div class="search-shell">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M16 16L12.5 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <input id="toolSearch" type="text" placeholder="Search calculators, converters, generators…">
+        <span class="kbd">⌘K</span>
+      </div>
+      <div class="chip-row">
+        <span class="chip" data-jump="calculators">SIP Calculator</span>
+        <span class="chip" data-jump="generators">Password Generator</span>
+        <span class="chip" data-jump="checkers">JSON Formatter</span>
+        <span class="chip" data-jump="converters">Unit Converter</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section" id="calculators">
+  <div class="wrap">
+    <div class="cat-head">
+      <span class="cat-dot" style="background:var(--accent-brass)"></span>
+      <h2>Calculators</h2>
+      <span class="count">finance &amp; everyday math</span>
+    </div>
+    <div class="card-grid">
+      <div class="tool-card disabled" data-cat="calc"><h3>SIP Calculator</h3><p>Project mutual fund SIP growth over time.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="calc"><h3>EMI Calculator</h3><p>Work out loan EMIs, interest, and payoff schedule.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="calc"><h3>Tax Regime Comparator</h3><p>Old vs new tax regime — see which saves more.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="calc"><h3>Percentage Calculator</h3><p>Quick percentage, increase, and ratio math.</p><span class="soon-badge">Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section" id="converters">
+  <div class="wrap">
+    <div class="cat-head">
+      <span class="cat-dot" style="background:var(--accent-coral)"></span>
+      <h2>Converters</h2>
+      <span class="count">units, currency &amp; files</span>
+    </div>
+    <div class="card-grid">
+      <div class="tool-card disabled" data-cat="conv"><h3>Unit Converter</h3><p>Length, weight, temperature, and more.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="conv"><h3>Currency Converter</h3><p>Live exchange rates between world currencies.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="conv"><h3>PDF ↔ Word</h3><p>Convert documents without losing formatting.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="conv"><h3>Image Converter</h3><p>Switch between PNG, JPG, and WebP instantly.</p><span class="soon-badge">Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section" id="generators">
+  <div class="wrap">
+    <div class="cat-head">
+      <span class="cat-dot" style="background:var(--accent-violet)"></span>
+      <h2>Generators</h2>
+      <span class="count">passwords, codes &amp; documents</span>
+    </div>
+    <div class="card-grid">
+      <a href="tools/password-generator.html" class="tool-card active" data-cat="gen"><h3>Password Generator</h3><p>Strong, random passwords with live strength check.</p><span class="tag">→ Open tool</span></a>
+      <div class="tool-card disabled" data-cat="gen"><h3>QR Code Generator</h3><p>Turn any link or text into a scannable QR code.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="gen"><h3>Invoice Generator</h3><p>Create a clean, professional invoice in minutes.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="gen"><h3>Fake Data Generator</h3><p>Sample JSON/CSV data for testing your app.</p><span class="soon-badge">Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="category-section" id="checkers">
+  <div class="wrap">
+    <div class="cat-head">
+      <span class="cat-dot" style="background:var(--accent-teal)"></span>
+      <h2>Checkers &amp; Validators</h2>
+      <span class="count">for developers</span>
+    </div>
+    <div class="card-grid">
+      <div class="tool-card disabled" data-cat="check"><h3>JSON Formatter</h3><p>Validate, format, and beautify JSON instantly.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="check"><h3>Regex Tester</h3><p>Test regular expressions against sample text live.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="check"><h3>Email Validator</h3><p>Check email format and domain validity.</p><span class="soon-badge">Coming soon</span></div>
+      <div class="tool-card disabled" data-cat="check"><h3>SSL Checker</h3><p>Check a domain's SSL certificate status.</p><span class="soon-badge">Coming soon</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Toolbench. Free tools, built to be fast.</p>
+    <div class="foot-links">
+      <a href="#">About</a>
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  menuBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const target = document.getElementById(chip.dataset.jump);
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // simple client-side search: filters + scrolls to first match
+  const searchInput = document.getElementById('toolSearch');
+  searchInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      const q = searchInput.value.trim().toLowerCase();
+      if(!q) return;
+      const cards = document.querySelectorAll('.tool-card');
+      for(const card of cards){
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        if(title.includes(q)){
+          card.scrollIntoView({behavior:'smooth', block:'center'});
+          card.style.borderColor = 'var(--text-primary)';
+          setTimeout(() => card.style.borderColor = '', 1200);
+          break;
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
