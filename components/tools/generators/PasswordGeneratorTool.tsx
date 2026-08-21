@@ -52,6 +52,7 @@ function strength(poolSize: number, length: number) {
 
 export function PasswordGeneratorTool() {
   const [length, setLength] = useState(16);
+  const [seed, setSeed] = useState(0);
   const [options, setOptions] = useState<CharacterOptions>({
     upper: true,
     lower: true,
@@ -61,7 +62,7 @@ export function PasswordGeneratorTool() {
   });
   const [copied, setCopied] = useState(false);
 
-  const generated = useMemo(() => createPassword(length, options), [length, options]);
+  const generated = useMemo(() => createPassword(length, options), [length, options, seed]);
   const strengthInfo = strength(generated.poolSize, length);
 
   async function copyPassword() {
@@ -124,7 +125,7 @@ export function PasswordGeneratorTool() {
           ))}
         </div>
 
-        <button type="button" className="tool-button" onClick={() => setLength((current) => current)}>
+        <button type="button" className="tool-button" onClick={() => setSeed((current) => current + 1)}>
           Generate new password
         </button>
       </section>
