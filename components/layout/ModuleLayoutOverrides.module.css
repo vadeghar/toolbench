@@ -8,41 +8,174 @@
   border-bottom: 0;
 }
 
+/* All pages inside a ModuleLayout use the same .wrap width and vertical rhythm. */
+.moduleLayout :global(.wrap) {
+  width: min(1120px, calc(100% - 48px));
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 0 80px;
+}
+
+/* One shared card geometry for catalogue cards. */
+.moduleLayout :global(.module-tool-grid) {
+  align-items: stretch;
+}
+
+.moduleLayout :global(.module-tool-card),
+.moduleLayout :global(.module-more-card) {
+  min-height: 176px;
+  border-color: var(--border-strong);
+}
+
+/* Consistent input-with-prefix/suffix focus treatment. */
 .moduleLayout :global(.input-with-prefix:focus-within),
 .moduleLayout :global(.input-with-suffix:focus-within) {
   border-color: var(--accent-violet);
   box-shadow: 0 0 0 2px rgba(155, 141, 232, 0.18);
 }
 
-.moduleLayout :global(.formatter-toolbar select:focus-visible) {
-  outline: 2px solid var(--accent-violet);
-  outline-offset: 2px;
-}
-
-.moduleLayout :global(.calculator-field > input),
-.moduleLayout :global(.calculator-field > textarea) {
+/* All native form controls inside tool fields share the same dimensions. */
+.moduleLayout :global(.calculator-field > input:not([type="checkbox"]):not([type="radio"]):not([type="range"])),
+.moduleLayout :global(.calculator-field > textarea),
+.moduleLayout :global(.calculator-field > select),
+.moduleLayout :global(.calculator-field input[type="date"]),
+.moduleLayout :global(.calculator-field input[type="datetime-local"]),
+.moduleLayout :global(.calculator-field input[type="month"]),
+.moduleLayout :global(.calculator-field input[type="time"]) {
   width: 100%;
-  min-height: 44px;
-  padding: 10px 12px;
+  min-height: 46px;
+  padding: 11px 14px;
   border: 1px solid var(--border-strong);
   border-radius: 9px;
   outline: none;
-  background: var(--bg);
+  background: var(--bg-elevated);
   color: var(--text-primary);
-  font: 0.95rem var(--font-body);
+  caret-color: var(--accent-violet);
+  font: 0.95rem/1.5 var(--font-body);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
 .moduleLayout :global(.calculator-field > textarea) {
-  min-height: 150px;
+  min-height: 180px;
   resize: vertical;
-  font-family: var(--font-mono);
-  line-height: 1.6;
+  font-family: var(--font-body);
+}
+
+.moduleLayout :global(.calculator-field > input:hover),
+.moduleLayout :global(.calculator-field > textarea:hover),
+.moduleLayout :global(.calculator-field > select:hover) {
+  border-color: var(--border-strong);
+  background: var(--bg-elevated-hover);
 }
 
 .moduleLayout :global(.calculator-field > input:focus),
-.moduleLayout :global(.calculator-field > textarea:focus) {
+.moduleLayout :global(.calculator-field > input:focus-visible),
+.moduleLayout :global(.calculator-field > textarea:focus),
+.moduleLayout :global(.calculator-field > textarea:focus-visible),
+.moduleLayout :global(.calculator-field > select:focus),
+.moduleLayout :global(.calculator-field > select:focus-visible) {
   border-color: var(--accent-violet);
-  box-shadow: 0 0 0 2px rgba(155, 141, 232, 0.18);
+  outline: 2px solid rgba(155, 141, 232, 0.18);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 1px var(--accent-violet);
+}
+
+.moduleLayout :global(.calculator-field > input::placeholder),
+.moduleLayout :global(.calculator-field > textarea::placeholder) {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+/* Native selects use the same Toolbench chevron as every other page. */
+.moduleLayout :global(.calculator-field > select),
+.moduleLayout :global(.formatter-toolbar > select) {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 42px;
+  background-color: var(--bg-elevated);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5.25L7 9.25L11 5.25' stroke='%239AA5B4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.moduleLayout :global(.calculator-field > select option),
+.moduleLayout :global(.formatter-toolbar > select option) {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+/* Remove number spinners so numeric inputs match text inputs. */
+.moduleLayout :global(input[type="number"]::-webkit-inner-spin-button),
+.moduleLayout :global(input[type="number"]::-webkit-outer-spin-button) {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.moduleLayout :global(input[type="number"]) {
+  -moz-appearance: textfield;
+}
+
+.moduleLayout :global(input[type="date"]),
+.moduleLayout :global(input[type="datetime-local"]),
+.moduleLayout :global(input[type="month"]),
+.moduleLayout :global(input[type="time"]) {
+  color-scheme: dark;
+}
+
+.moduleLayout :global(input[type="date"]::-webkit-calendar-picker-indicator),
+.moduleLayout :global(input[type="datetime-local"]::-webkit-calendar-picker-indicator),
+.moduleLayout :global(input[type="month"]::-webkit-calendar-picker-indicator),
+.moduleLayout :global(input[type="time"]::-webkit-calendar-picker-indicator) {
+  opacity: 0.72;
+  cursor: pointer;
+}
+
+/* Shared two-column field layout for date/time and similar tools. */
+.moduleLayout :global(.date-tool-grid) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* JSON/editor textareas intentionally get a larger working area. */
+.moduleLayout :global(.json-editor-grid) {
+  align-items: stretch;
+}
+
+.moduleLayout :global(.json-editor-grid > div),
+.moduleLayout :global(.json-editor-grid > label) {
+  display: grid;
+  gap: 8px;
+}
+
+.moduleLayout :global(.json-editor-grid textarea) {
+  width: 100%;
+  min-height: 420px;
+  resize: vertical;
+  padding: 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  outline: none;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font: 0.82rem/1.6 var(--font-mono);
+}
+
+.moduleLayout :global(.json-editor-grid textarea:focus) {
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 1px var(--accent-violet);
+}
+
+/* Existing shared result/panel styles retain one consistent card shell. */
+.moduleLayout :global(.tool-panel),
+.moduleLayout :global(.calculator-result) {
+  border-color: var(--border-strong);
+}
+
+.moduleLayout :global(.formatter-toolbar select:focus-visible) {
+  outline: 2px solid var(--accent-violet);
+  outline-offset: 2px;
 }
 
 .moduleLayout :global(.regex-preview pre) {
@@ -62,4 +195,15 @@
   border-radius: 3px;
   background: rgba(227, 165, 66, 0.24);
   color: var(--text-primary);
+}
+
+@media (max-width: 700px) {
+  .moduleLayout :global(.wrap) {
+    width: min(100% - 32px, 760px);
+    padding-top: 32px;
+  }
+
+  .moduleLayout :global(.date-tool-grid) {
+    grid-template-columns: 1fr;
+  }
 }
