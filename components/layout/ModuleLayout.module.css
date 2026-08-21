@@ -155,6 +155,64 @@
   font-weight: 600;
 }
 
+/* Shared Toolbench text controls */
+.moduleLayout :global(.calculator-field input[type="text"]),
+.moduleLayout :global(.calculator-field input[type="number"]),
+.moduleLayout :global(.calculator-field input[type="email"]),
+.moduleLayout :global(.calculator-field input[type="url"]),
+.moduleLayout :global(.calculator-field textarea) {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  outline: none;
+  background: var(--bg);
+  color: var(--text-primary);
+  caret-color: var(--accent-violet);
+  font: 0.95rem/1.5 var(--font-body);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.moduleLayout :global(.calculator-field textarea) {
+  min-height: 180px;
+  resize: vertical;
+  font-family: var(--font-body);
+}
+
+.moduleLayout :global(.calculator-field input[type="text"]:hover),
+.moduleLayout :global(.calculator-field input[type="number"]:hover),
+.moduleLayout :global(.calculator-field input[type="email"]:hover),
+.moduleLayout :global(.calculator-field input[type="url"]:hover),
+.moduleLayout :global(.calculator-field textarea:hover) {
+  border-color: var(--border-strong);
+  background: var(--bg-elevated-hover);
+}
+
+.moduleLayout :global(.calculator-field input[type="text"]:focus),
+.moduleLayout :global(.calculator-field input[type="text"]:focus-visible),
+.moduleLayout :global(.calculator-field input[type="number"]:focus),
+.moduleLayout :global(.calculator-field input[type="number"]:focus-visible),
+.moduleLayout :global(.calculator-field input[type="email"]:focus),
+.moduleLayout :global(.calculator-field input[type="email"]:focus-visible),
+.moduleLayout :global(.calculator-field input[type="url"]:focus),
+.moduleLayout :global(.calculator-field input[type="url"]:focus-visible),
+.moduleLayout :global(.calculator-field textarea:focus),
+.moduleLayout :global(.calculator-field textarea:focus-visible) {
+  border-color: var(--accent-violet);
+  outline: 2px solid rgba(155, 141, 232, 0.18);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 1px var(--accent-violet);
+}
+
+.moduleLayout :global(.calculator-field input::placeholder),
+.moduleLayout :global(.calculator-field textarea::placeholder) {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
 .moduleLayout :global(.input-with-prefix),
 .moduleLayout :global(.input-with-suffix) {
   display: flex;
@@ -456,6 +514,27 @@
 
 .moduleLayout :global(.json-editor-grid textarea:focus) {
   border-color: var(--accent-violet);
+}
+
+.moduleLayout :global(.regex-preview pre) {
+  min-height: 120px;
+  margin-top: 12px;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font: 0.88rem/1.7 var(--font-mono);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.moduleLayout :global(.regex-preview mark) {
+  padding: 1px 3px;
+  border-radius: 4px;
+  background: rgba(155, 141, 232, 0.28);
+  color: var(--text-primary);
 }
 
 .moduleLayout :global(.validation-status) {
