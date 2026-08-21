@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import styles from "./StyledSelect.module.css";
+
 export type StyledSelectOption = {
   value: string;
   label: string;
@@ -61,22 +63,22 @@ export function StyledSelect({ id, value, options, onChange, ariaLabel }: Styled
   if (!selected) return null;
 
   return (
-    <div ref={rootRef} className="styled-select" data-open={open}>
+    <div ref={rootRef} className={styles.styledSelect} data-open={open}>
       <button
         id={id}
         type="button"
-        className="styled-select-trigger"
+        className={styles.trigger}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={ariaLabel}
         onClick={() => setOpen((current) => !current)}
       >
         <span>{selected.label}</span>
-        <span className="styled-select-chevron" aria-hidden="true" />
+        <span className={styles.chevron} aria-hidden="true" />
       </button>
 
       {open && (
-        <div className="styled-select-menu" role="listbox" aria-labelledby={id}>
+        <div className={styles.menu} role="listbox" aria-labelledby={id}>
           {options.map((option) => {
             const isSelected = option.value === value;
             return (
@@ -85,14 +87,14 @@ export function StyledSelect({ id, value, options, onChange, ariaLabel }: Styled
                 type="button"
                 role="option"
                 aria-selected={isSelected}
-                className={`styled-select-option${isSelected ? " selected" : ""}`}
+                className={`${styles.option} ${isSelected ? styles.selected : ""}`}
                 onClick={() => {
                   onChange(option.value);
                   setOpen(false);
                 }}
               >
                 <span>{option.label}</span>
-                {isSelected && <span className="styled-select-check" aria-hidden="true">✓</span>}
+                {isSelected && <span className={styles.check} aria-hidden="true">✓</span>}
               </button>
             );
           })}
