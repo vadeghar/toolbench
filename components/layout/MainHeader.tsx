@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import styles from "./MainHeader.module.css";
-
 const navItems = [
   { label: "Calculators", href: "/finance-tools", category: "calc" },
   { label: "Developer Tools", href: "/dev-tools", category: "dev" },
@@ -20,9 +18,9 @@ export function MainHeader() {
 
   return (
     <>
-      <header className={styles.header}>
-        <div className={styles.inner}>
-          <Link href="/" className={styles.logo} onClick={closeMobileMenu} aria-label="Toolbench home">
+      <header className="main-header">
+        <div className="wrap header-inner">
+          <Link href="/" className="logo" onClick={closeMobileMenu} aria-label="Toolbench home">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
               <rect x="2" y="2" width="22" height="22" rx="6" stroke="#E3A542" strokeWidth="1.6" />
               <circle cx="9" cy="9" r="1.6" fill="#4FB3A9" />
@@ -33,9 +31,9 @@ export function MainHeader() {
             Toolbench
           </Link>
 
-          <nav className={styles.nav} aria-label="Main navigation">
+          <nav className="primary-nav" aria-label="Main navigation">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className={styles.navLink} data-cat={item.category}>
+              <Link key={item.href} href={item.href} data-cat={item.category}>
                 {item.label}
               </Link>
             ))}
@@ -43,7 +41,7 @@ export function MainHeader() {
 
           <button
             type="button"
-            className={styles.menuButton}
+            className="menu-btn"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
@@ -59,9 +57,9 @@ export function MainHeader() {
         </div>
       </header>
 
-      <nav className={`${styles.mobileNav} ${mobileOpen ? styles.mobileNavOpen : ""}`} aria-label="Mobile navigation">
+      <nav className={`mobile-nav${mobileOpen ? " open" : ""}`} aria-label="Mobile navigation">
         {navItems.map((item) => (
-          <Link key={item.href} href={item.href} className={styles.mobileLink} onClick={closeMobileMenu}>
+          <Link key={item.href} href={item.href} data-cat={item.category} onClick={closeMobileMenu}>
             {item.label}
           </Link>
         ))}
