@@ -83,23 +83,21 @@ export function PasswordGeneratorTool() {
   return (
     <div className="calculator-stack">
       <section className="tool-panel calculator-stack" aria-label="Generated password">
-        <div className="calculator-result">
-          <div className="result-primary">
-            <span>Generated password</span>
-            <strong style={{ wordBreak: "break-all" }}>{generated.value}</strong>
+        <div className="result-primary">
+          <span>Generated password</span>
+          <strong style={{ wordBreak: "break-all" }}>{generated.value}</strong>
+        </div>
+        <div className="result-grid">
+          <button type="button" className="tool-button" onClick={copyPassword} disabled={generated.poolSize === 0}>
+            {copied ? "Copied" : "Copy password"}
+          </button>
+          <div>
+            <span>Strength</span>
+            <strong style={{ color: strengthInfo.color }}>{strengthInfo.label}</strong>
           </div>
-          <div className="result-grid">
-            <button type="button" className="tool-button" onClick={copyPassword} disabled={generated.poolSize === 0}>
-              {copied ? "Copied" : "Copy password"}
-            </button>
-            <div>
-              <span>Strength</span>
-              <strong style={{ color: strengthInfo.color }}>{strengthInfo.label}</strong>
-            </div>
-          </div>
-          <div aria-hidden="true" style={{ height: 6, borderRadius: 999, background: "var(--bg)", overflow: "hidden" }}>
-            <div style={{ width: `${strengthInfo.percent}%`, height: "100%", background: strengthInfo.color, transition: "width .15s ease" }} />
-          </div>
+        </div>
+        <div aria-hidden="true" style={{ height: 6, borderRadius: 999, background: "var(--bg)", overflow: "hidden" }}>
+          <div style={{ width: `${strengthInfo.percent}%`, height: "100%", background: strengthInfo.color, transition: "width .15s ease" }} />
         </div>
       </section>
 
