@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import styles from "./MainHeader.module.css";
@@ -15,10 +14,7 @@ const navItems = [
 ];
 
 export function MainHeader() {
-  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  if (pathname === "/") return null;
 
   const closeMobileMenu = () => setMobileOpen(false);
 
