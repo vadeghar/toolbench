@@ -13,11 +13,11 @@ export default function FinanceToolsPage() {
 
   return (
     <main className="module-page-wrap">
-      <header className="module-page-header">
+      <div className="module-page-header">
         <span className="module-label">Finance</span>
         <h1>{categoryLabels.finance}</h1>
         <p>Fast, browser-based calculators for investment planning and everyday financial calculations.</p>
-      </header>
+      </div>
       <div className="module-tool-grid">
         {tools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}
       </div>
