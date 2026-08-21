@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MainHeader } from "@/components/layout/MainHeader";
 
 import "./globals.css";
+import "./ui-fixes.css";
 
 export const metadata: Metadata = {
   title: "Toolbench — Every tool you reach for",
