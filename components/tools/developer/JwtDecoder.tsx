@@ -5,7 +5,9 @@ import { useMemo, useState } from "react";
 function decodePart(value: string) {
   const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
   const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
-  return JSON.parse(decodeURIComponent(escape(atob(padded)))) as unknown;
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes)) as unknown;
 }
 
 export function JwtDecoder() {
