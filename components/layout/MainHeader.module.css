@@ -1,0 +1,152 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(18, 22, 29, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  max-width: 1240px;
+  height: 68px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.logo svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navLink {
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--text-primary);
+}
+
+.navLink[data-cat="calc"]:hover,
+.navLink[data-cat="calc"]:focus-visible {
+  border-color: var(--accent-brass);
+}
+
+.navLink[data-cat="dev"]:hover,
+.navLink[data-cat="dev"]:focus-visible,
+.navLink[data-cat="gen"]:hover,
+.navLink[data-cat="gen"]:focus-visible {
+  border-color: var(--accent-violet);
+}
+
+.navLink[data-cat="conv"]:hover,
+.navLink[data-cat="conv"]:focus-visible {
+  border-color: var(--accent-coral);
+}
+
+.navLink[data-cat="check"]:hover,
+.navLink[data-cat="check"]:focus-visible {
+  border-color: var(--accent-teal);
+}
+
+.menuButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.menuButton:hover,
+.menuButton:focus-visible {
+  border-color: var(--accent-violet);
+  outline: 2px solid rgba(155, 141, 232, 0.18);
+  outline-offset: 1px;
+}
+
+.mobileNav {
+  display: none;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.mobileNavOpen {
+  display: flex;
+}
+
+.mobileLink {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.mobileLink:hover,
+.mobileLink:focus-visible {
+  background: var(--bg-elevated-hover);
+  color: var(--text-primary);
+}
+
+/* Hide the old page-local Home header. The shared MainHeader is rendered by the root layout. */
+:global(body > div:has(.hero) .main-header),
+:global(body > div:has(.hero) .mobile-nav) {
+  display: none;
+}
+
+/* Password Generator has a legacy page-local header. Hide only that header
+   so the shared main navigation remains the single site-wide header. */
+:global(body:has(#pwOutput) header:not([class])) {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .nav {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .inner {
+    height: 62px;
+  }
+}
+
+@media (max-width: 560px) {
+  .inner {
+    padding: 0 16px;
+  }
+}

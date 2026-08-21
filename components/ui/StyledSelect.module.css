@@ -1,0 +1,98 @@
+.styledSelect {
+  position: relative;
+  width: auto;
+  min-width: 150px;
+  z-index: 20;
+}
+
+.trigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 14px 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font: 500 0.95rem var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.trigger:hover {
+  border-color: var(--accent-violet);
+  background: var(--bg-elevated-hover);
+}
+
+.styledSelect[data-open="true"] .trigger,
+.trigger:focus-visible {
+  border-color: var(--accent-violet);
+  outline: 2px solid rgba(155, 141, 232, 0.22);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 1px var(--accent-violet);
+}
+
+.chevron {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-right: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--text-secondary);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.styledSelect[data-open="true"] .chevron {
+  transform: rotate(225deg) translate(-1px, -1px);
+  border-color: var(--accent-violet);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  z-index: 100;
+}
+
+.option {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-primary);
+  font: 500 0.9rem var(--font-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--bg-elevated-hover);
+}
+
+.option.selected,
+.option.selected:hover {
+  background: var(--accent-violet);
+  color: #fff;
+}
+
+.check {
+  font-size: 1rem;
+  line-height: 1;
+}
