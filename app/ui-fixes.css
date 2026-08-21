@@ -1,6 +1,14 @@
-/* Shared UI refinements for the current Toolbench design system. */
+/* Shared Toolbench UI system.
+   Use the existing semantic classes everywhere; this file is the single global
+   refinement layer for page width, cards, search and native form controls. */
 
-/* Home hero: keep the eyebrow close to the header and the hero compact. */
+/* Canonical page width. Home, module and individual tool pages all use .wrap. */
+.wrap {
+  width: min(1120px, calc(100% - 48px));
+  max-width: 1120px;
+}
+
+/* Home hero rhythm. */
 .home-content .hero {
   padding: 34px 0 30px;
 }
@@ -13,7 +21,6 @@
   margin-bottom: 0;
 }
 
-/* Home search: consistent vertical rhythm and a slightly more substantial control. */
 .home-search-section {
   padding: 0 0 38px;
 }
@@ -27,14 +34,17 @@
   width: min(760px, 100%);
 }
 
-/* Registry cards use module-tool-card; keep a visible border regardless of the
-   older global/card rules that exist in globals.css. */
+/* One card system for home and module catalogues. */
 .module-tool-grid,
 .card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   align-items: stretch;
 }
 
 .module-tool-card,
+.tool-card,
 .module-more-card {
   position: relative;
   display: flex;
@@ -45,19 +55,21 @@
   border-radius: var(--radius);
   padding: 22px 20px 20px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.015);
   transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
 .module-tool-card.active:hover,
+.tool-card.active:hover,
 .module-more-card:hover {
   transform: translateY(-3px);
   background: var(--bg-elevated-hover);
   border-color: var(--accent-violet);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 .module-tool-card h3,
+.tool-card h3,
 .module-more-card h3 {
   font-family: var(--font-display);
   font-size: 1.05rem;
@@ -67,6 +79,7 @@
 }
 
 .module-tool-card p,
+.tool-card p,
 .module-more-card p {
   color: var(--text-secondary);
   font-size: 0.88rem;
@@ -75,14 +88,18 @@
 }
 
 .module-tool-card .tool-card-link,
-.module-more-card .tool-card-link {
+.module-tool-card .tag,
+.tool-card .tool-card-link,
+.tool-card .tag,
+.module-more-card .tool-card-link,
+.module-more-card .tag {
   margin-top: auto;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
   font-size: 0.72rem;
 }
 
-/* Search control spacing and focus treatment. */
+/* Search control: identical vertical rhythm on every search instance. */
 .search-box,
 .home-search-section .box {
   min-height: 56px;
@@ -106,70 +123,6 @@
   position: relative;
 }
 
-/* Consistent text controls throughout every tool page. */
-input:not([type="checkbox"]):not([type="radio"]),
-textarea,
-select {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-input:not([type="checkbox"]):not([type="radio"]),
-select {
-  min-height: 46px;
-  padding: 10px 14px;
-}
-
-textarea {
-  min-height: 150px;
-  padding: 12px 14px;
-  line-height: 1.55;
-  resize: vertical;
-}
-
-input:not([type="checkbox"]):not([type="radio"]):focus,
-textarea:focus,
-select:focus {
-  border-color: var(--accent-brass);
-  box-shadow: 0 0 0 3px rgba(227,165,66,0.10);
-  background: var(--bg-elevated-hover);
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-tertiary);
-  opacity: 1;
-}
-
-/* Native select arrow is replaced with a small Toolbench-colored chevron. */
-select {
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  padding-right: 42px;
-  background-color: var(--bg-elevated);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5.25L7 9.25L11 5.25' stroke='%239AA5B4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-}
-
-select:hover {
-  border-color: var(--border-strong);
-  background-color: var(--bg-elevated-hover);
-}
-
-select option {
-  color: var(--text-primary);
-  background: var(--bg-elevated);
-}
-
-/* Keep search input styling clean while still inheriting the shared font. */
 .search-box input[type="search"],
 .home-search-section input[type="search"] {
   min-height: 0;
@@ -187,7 +140,72 @@ select option {
   box-shadow: none;
 }
 
-/* Remove browser-specific number spinners so number fields match text fields. */
+/* Shared native controls. Specialized controls such as StyledSelect keep their
+   existing component implementation, while native controls get the same shell. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select {
+  min-height: 46px;
+  padding: 11px 14px;
+}
+
+textarea {
+  min-height: 180px;
+  padding: 12px 14px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):hover,
+textarea:hover,
+select:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-elevated-hover);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 3px rgba(155, 141, 232, 0.12);
+  background: var(--bg-elevated-hover);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 42px;
+  background-color: var(--bg-elevated);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5.25L7 9.25L11 5.25' stroke='%239AA5B4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+select option {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+/* Number/date/time browser chrome. */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
@@ -198,7 +216,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* Date/time controls should use the dark palette and a consistent picker icon. */
 input[type="date"],
 input[type="datetime-local"],
 input[type="month"],
@@ -219,8 +236,31 @@ input[type="search"]::-webkit-search-cancel-button {
   cursor: pointer;
 }
 
-/* Mobile rhythm. */
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-violet);
+  cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--accent-violet);
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 900px) {
+  .module-tool-grid,
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
+  .wrap {
+    width: min(100% - 32px, 760px);
+  }
+
   .home-content .hero {
     padding: 28px 0 26px;
   }
@@ -230,7 +270,15 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .module-tool-card,
+  .tool-card,
   .module-more-card {
     min-height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .module-tool-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
   }
 }
