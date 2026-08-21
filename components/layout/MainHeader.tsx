@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import styles from "./MainHeader.module.css";
+
 const navItems = [
   { label: "Calculators", href: "/finance-tools", category: "calc" },
   { label: "Developer Tools", href: "/dev-tools", category: "dev" },
@@ -16,17 +18,15 @@ export function MainHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // The home page currently owns its original header markup. Keep one header only there
-  // while using this shared header for every other route.
   if (pathname === "/") return null;
 
   const closeMobileMenu = () => setMobileOpen(false);
 
   return (
     <>
-      <header className="main-header">
-        <div className="wrap header-inner">
-          <Link href="/" className="logo" onClick={closeMobileMenu} aria-label="Toolbench home">
+      <header className={styles.header}>
+        <div className={styles.inner}>
+          <Link href="/" className={styles.logo} onClick={closeMobileMenu} aria-label="Toolbench home">
             <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
               <rect x="2" y="2" width="22" height="22" rx="6" stroke="#E3A542" strokeWidth="1.6" />
               <circle cx="9" cy="9" r="1.6" fill="#4FB3A9" />
@@ -37,9 +37,9 @@ export function MainHeader() {
             Toolbench
           </Link>
 
-          <nav className="primary-nav" aria-label="Main navigation">
+          <nav className={styles.nav} aria-label="Main navigation">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} data-cat={item.category}>
+              <Link key={item.href} href={item.href} className={styles.navLink} data-cat={item.category}>
                 {item.label}
               </Link>
             ))}
@@ -47,7 +47,7 @@ export function MainHeader() {
 
           <button
             type="button"
-            className="menu-btn"
+            className={styles.menuButton}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
@@ -63,9 +63,9 @@ export function MainHeader() {
         </div>
       </header>
 
-      <nav className={`mobile-nav${mobileOpen ? " open" : ""}`} aria-label="Mobile navigation">
+      <nav className={`${styles.mobileNav} ${mobileOpen ? styles.mobileNavOpen : ""}`} aria-label="Mobile navigation">
         {navItems.map((item) => (
-          <Link key={item.href} href={item.href} data-cat={item.category} onClick={closeMobileMenu}>
+          <Link key={item.href} href={item.href} className={styles.mobileLink} onClick={closeMobileMenu}>
             {item.label}
           </Link>
         ))}
