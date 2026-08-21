@@ -3,11 +3,16 @@
 import { useState } from "react";
 
 function encode(value: string) {
-  return btoa(unescape(encodeURIComponent(value)));
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+  return btoa(binary);
 }
 
 function decode(value: string) {
-  return decodeURIComponent(escape(atob(value)));
+  const binary = atob(value);
+  const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
 }
 
 export function Base64Encoder() {
