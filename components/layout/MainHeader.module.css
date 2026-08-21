@@ -119,6 +119,12 @@
   color: var(--text-primary);
 }
 
+/* Hide the old page-local Home header. The shared MainHeader is rendered by the root layout. */
+:global(body > div:has(.hero) .main-header),
+:global(body > div:has(.hero) .mobile-nav) {
+  display: none;
+}
+
 /* Password Generator has a legacy page-local header. Hide only that header
    so the shared main navigation remains the single site-wide header. */
 :global(body:has(#pwOutput) header:not([class])) {
