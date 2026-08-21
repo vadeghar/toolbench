@@ -53,7 +53,7 @@ export const tools: ToolDefinition[] = [
     description: "Test regular expressions against sample text live.",
     href: "/dev-tools/regex-tester",
     keywords: ["regex", "regexp", "regular expression", "developer"],
-    status: "coming-soon",
+    status: "active",
   },
   {
     slug: "unit-converter",
