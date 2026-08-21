@@ -49,6 +49,20 @@ export const tools: ToolDefinition[] = [
   { slug: "ssl-checker", name: "SSL Checker", category: "checkers", description: "Inspect the live TLS certificate presented by a domain.", href: "/checkers/ssl-checker", keywords: ["ssl", "tls", "certificate", "security"], status: "active" },
 ];
 
-export const categoryLabels: Record<ToolCategory, string> = { finance: "Finance Tools", dev: "Developer Tools", "date-time": "Date & Time", data: "Data & Encoding", converters: "Converters", generators: "Generators", checkers: "Checkers & Validators" };
-export function getToolBySlug(slug: string) { return tools.find((tool) => tool.slug === slug); }
-export function getToolsByCategory(category: ToolCategory) { return tools.filter((tool) => tool.category === category); }
+export const categoryLabels: Record<ToolCategory, string> = {
+  finance: "Finance Tools",
+  dev: "Developer Tools",
+  "date-time": "Date & Time",
+  data: "Data & Encoding",
+  converters: "Converters",
+  generators: "Generators",
+  checkers: "Checkers & Validators",
+};
+
+export function getToolBySlug(slug: string) {
+  return tools.find((tool) => tool.slug === slug);
+}
+
+export function getToolsByCategory(category: ToolCategory) {
+  return tools.filter((tool) => tool.category === category);
+}
