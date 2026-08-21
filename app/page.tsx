@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const homeHtml = `<header>
+const homeHtml = `<header class="main-header">
   <div class="wrap header-inner">
     <a href="/" class="logo">
       <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="2" y="2" width="22" height="22" rx="6" stroke="#E3A542" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#4FB3A9"/><circle cx="17" cy="9" r="1.6" fill="#9B8DE8"/><circle cx="9" cy="17" r="1.6" fill="#E28168"/><circle cx="17" cy="17" r="1.6" fill="#E3A542"/></svg>
