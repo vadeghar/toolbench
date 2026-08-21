@@ -1,6 +1,8 @@
 export type ToolCategory =
   | "finance"
   | "dev"
+  | "date-time"
+  | "data"
   | "converters"
   | "generators"
   | "checkers";
