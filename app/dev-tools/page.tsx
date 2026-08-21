@@ -13,11 +13,11 @@ export default function DevToolsPage() {
 
   return (
     <main className="module-page-wrap">
-      <header className="module-page-header">
+      <div className="module-page-header">
         <span className="module-label">Developers</span>
         <h1>{categoryLabels.dev}</h1>
         <p>Practical developer utilities designed to work instantly in your browser.</p>
-      </header>
+      </div>
       <div className="module-tool-grid">
         {tools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}
       </div>
