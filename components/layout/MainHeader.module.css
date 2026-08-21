@@ -119,6 +119,12 @@
   color: var(--text-primary);
 }
 
+/* Password Generator has a legacy page-local header. Hide only that header
+   so the shared main navigation remains the single site-wide header. */
+:global(body:has(#pwOutput) header:not([class])) {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .nav {
     display: none;
