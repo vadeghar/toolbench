@@ -105,17 +105,6 @@
   background: var(--bg-elevated);
 }
 
-/* Remove number spinners so numeric inputs match text inputs. */
-.moduleLayout :global(input[type="number"]::-webkit-inner-spin-button),
-.moduleLayout :global(input[type="number"]::-webkit-outer-spin-button) {
-  margin: 0;
-  -webkit-appearance: none;
-}
-
-.moduleLayout :global(input[type="number"]) {
-  -moz-appearance: textfield;
-}
-
 .moduleLayout :global(input[type="date"]),
 .moduleLayout :global(input[type="datetime-local"]),
 .moduleLayout :global(input[type="month"]),
