@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import "./ModuleLayoutOverrides.module.css";
 import styles from "./ModuleLayout.module.css";
 
 export type ModuleLayoutProps = {
