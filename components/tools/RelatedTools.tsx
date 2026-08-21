@@ -2,7 +2,9 @@ import { tools } from "@/lib/tools/registry";
 import type { ToolCategory } from "@/lib/tools/types";
 
 export function RelatedTools({ currentSlug, category }: { currentSlug: string; category: ToolCategory }) {
-  const related = tools.filter((tool) => tool.category === category && tool.slug !== currentSlug).slice(0, 3);
+  const related = tools
+    .filter((tool) => tool.category === category && tool.slug !== currentSlug && tool.status === "active")
+    .slice(0, 3);
   if (!related.length) return null;
 
   return (
