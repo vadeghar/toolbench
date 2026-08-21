@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { StyledSelect } from "@/components/ui/StyledSelect";
+
 function encode(value: string) {
   const bytes = new TextEncoder().encode(value);
   let binary = "";
@@ -32,10 +34,15 @@ export function Base64Encoder() {
       <section className="tool-panel">
         <div className="formatter-toolbar">
           <label htmlFor="base64-mode">Mode</label>
-          <select id="base64-mode" value={mode} onChange={(e) => setMode(e.target.value as "encode" | "decode")}>
-            <option value="encode">Encode</option>
-            <option value="decode">Decode</option>
-          </select>
+          <StyledSelect
+            id="base64-mode"
+            value={mode}
+            onChange={(value) => setMode(value as "encode" | "decode")}
+            options={[
+              { value: "encode", label: "Encode" },
+              { value: "decode", label: "Decode" },
+            ]}
+          />
           <button type="button" className="tool-button secondary" onClick={() => setInput("")}>Clear</button>
         </div>
         <div className="json-editor-grid">
