@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 import { tools } from "@/lib/tools/registry";
 import { searchTools } from "@/lib/tools/search";
+import styles from "./ToolSearch.module.css";
 
 export function ToolSearch() {
   const [query, setQuery] = useState("");
@@ -12,31 +13,19 @@ export function ToolSearch() {
   const searching = query.trim().length > 0;
 
   return (
-    <div className="global-tool-search">
-      <div className="global-tool-search-box">
+    <div className={styles.search}>
+      <div className={styles.box}>
         <span aria-hidden="true">⌕</span>
-        <input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search tools..."
-          aria-label="Search tools"
-        />
+        <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search tools..." aria-label="Search tools" />
         <kbd>⌘K</kbd>
       </div>
       {searching && (
-        <div className="global-tool-search-results" role="listbox" aria-label="Matching tools">
+        <div className={styles.results} role="listbox" aria-label="Matching tools">
           {results.length > 0 ? results.map((tool) => (
-            <Link key={tool.slug} href={tool.href} className="global-tool-search-result" onClick={() => setQuery("")}>
-              <span>
-                <strong>{tool.name}</strong>
-                <small>{tool.description}</small>
-              </span>
-              <span aria-hidden="true">→</span>
+            <Link key={tool.slug} href={tool.href} className={styles.result} onClick={() => setQuery("")}>
+              <span><strong>{tool.name}</strong><small>{tool.description}</small></span><span aria-hidden="true">→</span>
             </Link>
-          )) : (
-            <div className="global-tool-search-empty">No matching tools</div>
-          )}
+          )) : <div className={styles.empty}>No matching tools</div>}
         </div>
       )}
     </div>
