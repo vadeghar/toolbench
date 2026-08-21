@@ -6,9 +6,9 @@ import { useState } from "react";
 const navItems = [
   { label: "Calculators", href: "/finance-tools", category: "calc" },
   { label: "Developer Tools", href: "/dev-tools", category: "dev" },
-  { label: "Converters", href: "/#converters", category: "conv" },
-  { label: "Generators", href: "/#generators", category: "gen" },
-  { label: "Checkers", href: "/#checkers", category: "check" },
+  { label: "Converters", href: "/converters", category: "conv" },
+  { label: "Generators", href: "/generators", category: "gen" },
+  { label: "Checkers", href: "/checkers", category: "check" },
 ];
 
 export function MainHeader() {
