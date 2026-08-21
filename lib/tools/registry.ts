@@ -3,7 +3,7 @@ import type { ToolCategory, ToolDefinition } from "./types";
 export const tools: ToolDefinition[] = [
   { slug: "sip-calculator", name: "SIP Calculator", category: "finance", description: "Project mutual fund SIP growth over time.", href: "/finance-tools/sip-calculator", keywords: ["sip", "mutual fund", "investment", "returns"], status: "active" },
   { slug: "emi-calculator", name: "EMI Calculator", category: "finance", description: "Calculate loan EMI, total interest, and repayment amount.", href: "/finance-tools/emi-calculator", keywords: ["emi", "loan", "interest", "repayment"], status: "active" },
-  { slug: "tax-regime-calculator", name: "Tax Regime Calculator", category: "finance", description: "Compare India's old and new income-tax regimes.", href: "/finance-tools/tax-regime-calculator", keywords: ["income tax", "old regime", "new regime", "tax"], status: "active" },
+  { slug: "tax-regime-calculator", name: "Tax Regime Calculator", category: "finance", description: "Compare illustrative Indian old and new income-tax regime estimates.", href: "/finance-tools/tax-regime-calculator", keywords: ["income tax", "old regime", "new regime", "tax"], status: "active" },
   { slug: "percentage-calculator", name: "Percentage Calculator", category: "finance", description: "Calculate percentages, changes, ratios, and differences.", href: "/finance-tools/percentage-calculator", keywords: ["percentage", "percent", "ratio", "math"], status: "active" },
   { slug: "json-formatter", name: "JSON Formatter", category: "dev", description: "Validate, format, and beautify JSON instantly in your browser.", href: "/dev-tools/json-formatter", keywords: ["json", "formatter", "validator", "developer"], status: "active" },
   { slug: "regex-tester", name: "Regex Tester", category: "dev", description: "Test regular expressions against sample text live.", href: "/dev-tools/regex-tester", keywords: ["regex", "regexp", "regular expression", "developer"], status: "active" },
@@ -31,7 +31,7 @@ export const tools: ToolDefinition[] = [
   { slug: "xml-validator", name: "XML Validator", category: "dev", description: "Validate basic XML structure and syntax.", href: "/dev-tools/xml-validator", keywords: ["xml", "validator", "validation"], status: "active" },
   { slug: "json-minifier", name: "JSON Minifier", category: "dev", description: "Minify JSON by removing unnecessary whitespace.", href: "/dev-tools/json-minifier", keywords: ["json", "minifier", "compress"], status: "active" },
   { slug: "url-parser", name: "URL Parser", category: "dev", description: "Inspect URL components and query parameters.", href: "/dev-tools/url-parser", keywords: ["url", "parser", "query", "uri"], status: "active" },
-  { slug: "jwt-generator", name: "JWT Generator", category: "dev", description: "Generate a JWT locally for development/testing.", href: "/dev-tools/jwt-generator", keywords: ["jwt", "token", "generator", "hs256"], status: "active" },
+  { slug: "jwt-generator", name: "JWT Generator", category: "dev", description: "Create HS256 JWTs locally using a supplied secret.", href: "/dev-tools/jwt-generator", keywords: ["jwt", "token", "generator", "hs256"], status: "active" },
   { slug: "jwt-expiry-checker", name: "JWT Expiry Checker", category: "dev", description: "Inspect a JWT expiration claim and report its status.", href: "/dev-tools/jwt-expiry-checker", keywords: ["jwt", "expiry", "expiration", "token"], status: "active" },
   { slug: "http-status-lookup", name: "HTTP Status Code Lookup", category: "dev", description: "Look up HTTP status codes and their meanings.", href: "/dev-tools/http-status-lookup", keywords: ["http", "status", "code", "api"], status: "active" },
   { slug: "mime-type-lookup", name: "MIME Type Lookup", category: "dev", description: "Find common MIME types by extension or type.", href: "/dev-tools/mime-type-lookup", keywords: ["mime", "content type", "extension", "http"], status: "active" },
@@ -41,13 +41,18 @@ export const tools: ToolDefinition[] = [
   { slug: "diff-checker", name: "Diff Checker", category: "dev", description: "Compare two text blocks and highlight differences.", href: "/dev-tools/diff-checker", keywords: ["diff", "compare", "text", "difference"], status: "active" },
   { slug: "text-json", name: "Text ↔ JSON", category: "dev", description: "Convert simple text key-value data to and from JSON.", href: "/dev-tools/text-json", keywords: ["text", "json", "convert", "key value"], status: "active" },
   { slug: "json-path-tester", name: "JSON Path Tester", category: "dev", description: "Test simple JSONPath expressions against JSON data.", href: "/dev-tools/json-path-tester", keywords: ["jsonpath", "json", "path", "query"], status: "active" },
-  { slug: "unit-converter", name: "Unit Converter", category: "converters", description: "Convert length, weight, temperature, and other common units.", href: "/converters/unit-converter", keywords: ["unit", "length", "weight", "temperature", "converter"], status: "active" },
-  { slug: "currency-converter", name: "Currency Converter", category: "converters", description: "Convert between currencies using live exchange rates.", href: "/converters/currency-converter", keywords: ["currency", "exchange rate", "forex", "converter"], status: "active" },
+  { slug: "unit-converter", name: "Unit Converter", category: "converters", description: "Convert length, weight, temperature, and other common units.", href: "/converters/unit-converter", keywords: ["unit", "length", "weight", "temperature", "converter"], status: "coming-soon" },
+  { slug: "currency-converter", name: "Currency Converter", category: "converters", description: "Convert between currencies using live exchange rates.", href: "/converters/currency-converter", keywords: ["currency", "exchange rate", "forex", "converter"], status: "coming-soon" },
   { slug: "password-generator", name: "Password Generator", category: "generators", description: "Generate strong random passwords entirely in your browser.", href: "/password-generator", keywords: ["password", "generator", "security", "random"], status: "active" },
-  { slug: "qr-code-generator", name: "QR Code Generator", category: "generators", description: "Turn a link or text into a scannable QR code.", href: "/generators/qr-code-generator", keywords: ["qr", "qrcode", "generator", "barcode"], status: "active" },
-  { slug: "email-validator", name: "Email Validator", category: "checkers", description: "Check email format and domain validity.", href: "/checkers/email-validator", keywords: ["email", "validator", "validation", "syntax"], status: "active" },
-  { slug: "ssl-checker", name: "SSL Checker", category: "checkers", description: "Inspect the live TLS certificate presented by a domain.", href: "/checkers/ssl-checker", keywords: ["ssl", "tls", "certificate", "security"], status: "active" },
+  { slug: "qr-code-generator", name: "QR Code Generator", category: "generators", description: "Turn a link or text into a scannable QR code.", href: "/generators/qr-code-generator", keywords: ["qr", "qrcode", "generator", "barcode"], status: "coming-soon" },
+  { slug: "email-validator", name: "Email Validator", category: "checkers", description: "Check email format and domain validity.", href: "/checkers/email-validator", keywords: ["email", "validator", "validation", "mx"], status: "coming-soon" },
+  { slug: "ssl-checker", name: "SSL Checker", category: "checkers", description: "Check a domain's SSL certificate status.", href: "/checkers/ssl-checker", keywords: ["ssl", "tls", "certificate", "security"], status: "coming-soon" },
 ];
+
+// export const categoryLabels: Record<ToolCategory, string> = { finance: "Finance Tools", dev: "Developer Tools", converters: "Converters", generators: "Generators", checkers: "Checkers & Validators" };
+// export function getToolBySlug(slug: string) { return tools.find((tool) => tool.slug === slug); }
+// export function getToolsByCategory(category: ToolCategory) { return tools.filter((tool) => tool.category === category); }
+
 
 export const categoryLabels: Record<ToolCategory, string> = {
   finance: "Finance Tools",
