@@ -30,7 +30,30 @@ export function JsonFormatter() {
 
   async function copyOutput() {
     if (!result.output) return;
-    await navigator.clipboard.writeText(result.output);
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(result.output);
+      } else {
+        throw new Error("Clipboard API unavailable");
+      }
+    } catch {
+      const fallback = document.createElement("textarea");
+      fallback.value = result.output;
+      fallback.setAttribute("readonly", "");
+      fallback.style.position = "fixed";
+      fallback.style.opacity = "0";
+      document.body.appendChild(fallback);
+      fallback.select();
+      fallback.setSelectionRange(0, fallback.value.length);
+
+      try {
+        if (!document.execCommand("copy")) throw new Error("Copy command failed");
+      } finally {
+        document.body.removeChild(fallback);
+      }
+    }
+
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1400);
   }
