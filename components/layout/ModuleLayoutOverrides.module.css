@@ -1,0 +1,20 @@
+.moduleLayout :global(.module-page-header),
+.moduleLayout :global(.tool-page-header) {
+  position: static;
+  top: auto;
+  z-index: auto;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 0;
+}
+
+.moduleLayout :global(.input-with-prefix:focus-within),
+.moduleLayout :global(.input-with-suffix:focus-within) {
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 2px rgba(155, 141, 232, 0.18);
+}
+
+.moduleLayout :global(.formatter-toolbar select:focus-visible) {
+  outline: 2px solid var(--accent-violet);
+  outline-offset: 2px;
+}
