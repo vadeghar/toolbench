@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 
 import { Breadcrumbs } from "./Breadcrumbs";
-import { ModuleLayout } from "./ModuleLayout";
 
 export type ToolLayoutProps = {
   category: string;
@@ -12,7 +11,7 @@ export type ToolLayoutProps = {
 
 export function ToolLayout({ category, toolName, description, children }: ToolLayoutProps) {
   return (
-    <ModuleLayout className="tool-layout">
+    <div className="tool-layout">
       <div className="tool-page-wrap">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: category }, { label: toolName }]} />
         <header className="tool-page-header">
@@ -22,6 +21,6 @@ export function ToolLayout({ category, toolName, description, children }: ToolLa
         </header>
         {children}
       </div>
-    </ModuleLayout>
+    </div>
   );
 }
