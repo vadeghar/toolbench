@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ModuleLayout } from "@/components/layout/ModuleLayout";
+import { ToolLayout } from "@/components/layout/ToolLayout";
 import { PasswordGeneratorTool } from "@/components/tools/generators/PasswordGeneratorTool";
 
 export const metadata: Metadata = {
@@ -11,14 +12,13 @@ export const metadata: Metadata = {
 export default function PasswordGeneratorPage() {
   return (
     <ModuleLayout className="generator-module">
-      <div className="wrap">
-        <div className="tool-page-header">
-          <span className="tool-page-category">Generators</span>
-          <h1>Password Generator</h1>
-          <p>Create strong, random passwords with full control over length and character types. Everything happens in your browser.</p>
-        </div>
+      <ToolLayout
+        category="Generators"
+        toolName="Password Generator"
+        description="Create strong, random passwords with full control over length and character types. Everything happens in your browser."
+      >
         <PasswordGeneratorTool />
-      </div>
+      </ToolLayout>
     </ModuleLayout>
   );
 }
