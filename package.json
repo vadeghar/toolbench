@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "sql-formatter": "^15.8.2"
   },
   "devDependencies": {
     "@types/node": "latest",
