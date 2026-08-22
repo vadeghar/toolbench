@@ -8,6 +8,7 @@ import { HeaderSearch } from "./HeaderSearch";
 const navItems: { label: string; href: string; category: ToolCategory }[] = [
   { label: "Calculators", href: "/finance-tools", category: "finance" },
   { label: "Developer Tools", href: "/dev-tools", category: "dev" },
+  { label: "Date & Time", href: "/date-time", category: "date-time" },
   { label: "Converters", href: "/converters", category: "converters" },
   { label: "Generators", href: "/generators", category: "generators" },
   { label: "Checkers", href: "/checkers", category: "checkers" },
