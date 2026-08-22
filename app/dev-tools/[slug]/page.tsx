@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
-import { ModuleLayout } from "@/components/layout/ModuleLayout";
+import { ToolLayout } from "@/components/layout/ToolLayout";
+import { CronGeneratorTool } from "@/components/tools/CronGeneratorTool";
 import { DeveloperUtilityTool } from "@/components/tools/DeveloperUtilityTool";
 import { JwtGeneratorTool } from "@/components/tools/JwtGeneratorTool";
+import { RegexTesterTool } from "@/components/tools/RegexTesterTool";
+import { SqlFormatterTool } from "@/components/tools/SqlFormatterTool";
 import { getToolBySlug, getToolsByCategory } from "@/lib/tools/registry";
 
 export function generateStaticParams() {
@@ -27,17 +30,22 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <ModuleLayout>
-      <div className="tool-page-wrap">
-        <div className="tool-page-header">
-          <span className="tool-page-category">
-            {tool.category === "data" ? "Data & Encoding" : "Developer Tools"}
-          </span>
-          <h1>{tool.name}</h1>
-          <p>{tool.description}</p>
-        </div>
-        {tool.slug === "jwt-generator" ? <JwtGeneratorTool /> : <DeveloperUtilityTool slug={tool.slug} />}
-      </div>
-    </ModuleLayout>
+    <ToolLayout
+      category={tool.category === "data" ? "Data & Encoding" : "Developer Tools"}
+      toolName={tool.name}
+      description={tool.description}
+    >
+      {tool.slug === "cron-generator" ? (
+        <CronGeneratorTool />
+      ) : tool.slug === "sql-formatter" ? (
+        <SqlFormatterTool />
+      ) : tool.slug === "regex-tester" ? (
+        <RegexTesterTool />
+      ) : tool.slug === "jwt-generator" ? (
+        <JwtGeneratorTool />
+      ) : (
+        <DeveloperUtilityTool slug={tool.slug} />
+      )}
+    </ToolLayout>
   );
 }

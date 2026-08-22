@@ -9,9 +9,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@eslint-community/regexpp": "^4.12.2",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "sql-formatter": "^15.8.2"
   },
   "devDependencies": {
     "@types/node": "latest",
