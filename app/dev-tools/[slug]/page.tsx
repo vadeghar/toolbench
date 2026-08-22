@@ -3,6 +3,7 @@ import { ToolLayout } from "@/components/layout/ToolLayout";
 import { CronGeneratorTool } from "@/components/tools/CronGeneratorTool";
 import { DeveloperUtilityTool } from "@/components/tools/DeveloperUtilityTool";
 import { JwtGeneratorTool } from "@/components/tools/JwtGeneratorTool";
+import { RegexTesterTool } from "@/components/tools/RegexTesterTool";
 import { SqlFormatterTool } from "@/components/tools/SqlFormatterTool";
 import { getToolBySlug, getToolsByCategory } from "@/lib/tools/registry";
 
@@ -38,6 +39,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         <CronGeneratorTool />
       ) : tool.slug === "sql-formatter" ? (
         <SqlFormatterTool />
+      ) : tool.slug === "regex-tester" ? (
+        <RegexTesterTool />
       ) : tool.slug === "jwt-generator" ? (
         <JwtGeneratorTool />
       ) : (
