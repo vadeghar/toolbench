@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { ToolLayout } from "@/components/layout/ToolLayout";
+import { CronGeneratorTool } from "@/components/tools/CronGeneratorTool";
 import { DeveloperUtilityTool } from "@/components/tools/DeveloperUtilityTool";
 import { JwtGeneratorTool } from "@/components/tools/JwtGeneratorTool";
 import { getToolBySlug, getToolsByCategory } from "@/lib/tools/registry";
@@ -32,7 +33,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       toolName={tool.name}
       description={tool.description}
     >
-      {tool.slug === "jwt-generator" ? <JwtGeneratorTool /> : <DeveloperUtilityTool slug={tool.slug} />}
+      {tool.slug === "cron-generator" ? (
+        <CronGeneratorTool />
+      ) : tool.slug === "jwt-generator" ? (
+        <JwtGeneratorTool />
+      ) : (
+        <DeveloperUtilityTool slug={tool.slug} />
+      )}
     </ToolLayout>
   );
 }
