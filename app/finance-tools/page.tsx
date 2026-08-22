@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ModuleToolCatalogue } from "@/components/tools/ModuleToolCatalogue";
-import { ToolSearch } from "@/components/tools/ToolSearch";
 
 export const metadata: Metadata = { title: "Finance Tools — Toolbench", description: "Free finance calculators for investment planning and everyday calculations." };
 
@@ -12,7 +11,6 @@ export default function FinanceToolsPage() {
         <h1>Finance Tools</h1>
         <p>Fast, browser-based calculators for investment planning and everyday financial calculations.</p>
       </div>
-      <ToolSearch />
       <ModuleToolCatalogue category="finance" />
     </main>
   );

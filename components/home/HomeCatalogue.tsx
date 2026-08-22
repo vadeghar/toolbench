@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ToolCard } from "@/components/tools/ToolCard";
-import { ToolSearch } from "@/components/tools/ToolSearch";
 import { categoryLabels, getToolsByCategory } from "@/lib/tools/registry";
 import type { ToolCategory } from "@/lib/tools/types";
 
@@ -16,7 +15,6 @@ const routes:Record<ToolCategory,string>={finance:"/finance-tools",dev:"/dev-too
 
 export function HomeCatalogue(){
   return <>
-    <section className="home-search-section"><div className="wrap"><ToolSearch/></div></section>
     {categories.map(({id,category,description})=>{
       const items=getToolsByCategory(category);
       return <section className="category-section" id={id} key={category}>

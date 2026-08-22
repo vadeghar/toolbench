@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { ToolCategory } from "@/lib/tools/types";
+import { HeaderSearch } from "./HeaderSearch";
 
 const navItems: { label: string; href: string; category: ToolCategory }[] = [
   { label: "Calculators", href: "/finance-tools", category: "finance" },
@@ -31,6 +32,8 @@ export function MainHeader() {
             </svg>
             Toolbench
           </Link>
+
+          <HeaderSearch />
 
           <nav className="primary-nav" aria-label="Main navigation">
             {navItems.map((item) => (
