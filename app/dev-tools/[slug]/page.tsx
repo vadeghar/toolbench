@@ -3,6 +3,7 @@ import { ToolLayout } from "@/components/layout/ToolLayout";
 import { CronGeneratorTool } from "@/components/tools/CronGeneratorTool";
 import { DeveloperUtilityTool } from "@/components/tools/DeveloperUtilityTool";
 import { JwtGeneratorTool } from "@/components/tools/JwtGeneratorTool";
+import { SqlFormatterTool } from "@/components/tools/SqlFormatterTool";
 import { getToolBySlug, getToolsByCategory } from "@/lib/tools/registry";
 
 export function generateStaticParams() {
@@ -35,6 +36,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     >
       {tool.slug === "cron-generator" ? (
         <CronGeneratorTool />
+      ) : tool.slug === "sql-formatter" ? (
+        <SqlFormatterTool />
       ) : tool.slug === "jwt-generator" ? (
         <JwtGeneratorTool />
       ) : (
