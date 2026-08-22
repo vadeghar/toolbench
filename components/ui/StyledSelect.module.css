@@ -7,15 +7,15 @@
 
 .trigger {
   width: 100%;
-  min-height: 48px;
+  min-height: 46px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 0 14px 0 16px;
+  padding: 0 14px;
   border: 1px solid var(--border-strong);
-  border-radius: 10px;
-  background: var(--bg);
+  border-radius: 9px;
+  background: var(--bg-elevated);
   color: var(--text-primary);
   font: 500 0.95rem var(--font-body);
   text-align: left;
@@ -31,7 +31,7 @@
 .styledSelect[data-open="true"] .trigger,
 .trigger:focus-visible {
   border-color: var(--accent-violet);
-  outline: 2px solid rgba(155, 141, 232, 0.22);
+  outline: 2px solid rgba(155, 141, 232, 0.18);
   outline-offset: 1px;
   box-shadow: 0 0 0 1px var(--accent-violet);
 }

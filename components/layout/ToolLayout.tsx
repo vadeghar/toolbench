@@ -12,7 +12,7 @@ export type ToolLayoutProps = {
 export function ToolLayout({ category, toolName, description, children }: ToolLayoutProps) {
   return (
     <div className="tool-layout">
-      <div className="tool-page-wrap">
+      <div className="wrap">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: category }, { label: toolName }]} />
         <header className="tool-page-header">
           <span className="tool-page-category">{category}</span>

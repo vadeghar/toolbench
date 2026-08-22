@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
+import { Footer } from "@/components/layout/Footer";
 import { MainHeader } from "@/components/layout/MainHeader";
 
 import "./globals.css";
+import "./ui-fixes.css";
 
 export const metadata: Metadata = {
   title: "Toolbench — Every tool you reach for",
@@ -20,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <MainHeader />
         {children}
+        <Footer />
       </body>
     </html>
   );
