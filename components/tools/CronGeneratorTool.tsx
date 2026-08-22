@@ -10,6 +10,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 const pad = (n: number) => String(n).padStart(2, "0");
 const parts = (time: string) => { const [h, m] = time.split(":").map(Number); return { h: h || 0, m: m || 0 }; };
 const dateText = (d: Date) => d.toLocaleString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+const steppedList = (start: number, end: number, step: number) => Array.from({ length: Math.floor((end - start) / step) + 1 }, (_, i) => start + i * step).join(",");
 
 function values(field: string, min: number, max: number, question = false) {
   if (question && field === "?") return null;
@@ -57,9 +58,9 @@ export function CronGeneratorTool() {
   const expression = useMemo(() => {
     const { h, m } = parts(time); const n = Math.max(1, Number(interval) || 1); const start = Math.max(0, Math.min(59, Number(minuteStart) || 0));
     switch (mode) {
-      case "minutes": return `0 ${start}/${Math.min(n, 59)} * * * ?`;
-      case "hourly": return `0 ${pad(m)} 0/${Math.min(n, 23)} * * ?`;
-      case "daily": return `0 ${pad(m)} ${pad(h)} 1/${Math.min(n, 31)} * ?`;
+      case "minutes": return `0 ${steppedList(start, 59, Math.min(n, 59))} * * * ?`;
+      case "hourly": return `0 ${pad(m)} ${steppedList(0, 23, Math.min(n, 23))} * * ?`;
+      case "daily": return `0 ${pad(m)} ${pad(h)} ${steppedList(1, 31, Math.min(n, 31))} * ?`;
       case "weekly": return `0 ${pad(m)} ${pad(h)} ? * ${weekdays.join(",") || "MON"}`;
       case "monthly": return `0 ${pad(m)} ${pad(h)} ${lastDay ? "L" : monthDay} * ?`;
       case "yearly": return `0 ${pad(m)} ${pad(h)} ${yearDay} ${yearMonth} ?`;
