@@ -37,7 +37,7 @@ function nextDates(expression: string) {
     const dayMatch = last ? dayOfMonth === new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate() : dom ? dom.has(dayOfMonth) : true;
     const weekMatch = dow ? dow.has(dayOfWeek) : true;
     const calendarMatch = f[3] === "?" ? weekMatch : f[5] === "?" ? dayMatch : dayMatch || weekMatch;
-    if (min.has(d.getMinutes()) && hour.has(d.getHours()) && mon.has(month) && calendarMatch) result.push(new Date(d));
+    if (min.has(d.getMinutes()) && hour.has(d.getHours()) && mon.has(month) && calendarMatch) result.push(new Date(d.getTime()));
     d.setMinutes(d.getMinutes() + 1);
   }
   return result;
