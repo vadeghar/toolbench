@@ -30,15 +30,6 @@
   margin-bottom: 0;
 }
 
-.home-search-section {
-  padding: 0 0 38px;
-}
-
-.home-search-section .wrap {
-  display: flex;
-  justify-content: center;
-}
-
 /* ---------- Card system (home + module catalogues) ---------- */
 
 .module-tool-grid {
@@ -165,16 +156,14 @@
 
 /* ---------- Search control: identical rhythm everywhere ---------- */
 
-.search-box,
-.home-search-section .box {
+.search-box {
   min-height: 56px;
   padding: 0 18px;
   border: 1px solid var(--border-strong);
   border-radius: 12px;
 }
 
-.search-box input,
-.home-search-section .box input {
+.search-box input {
   min-width: 0;
   height: 52px;
   padding: 0;
@@ -613,8 +602,7 @@ input[type="radio"] {
     grid-template-columns: 1fr;
   }
 
-  .search-box,
-  .home-search-section .box {
+  .search-box {
     min-height: 52px;
     padding: 0 14px;
   }

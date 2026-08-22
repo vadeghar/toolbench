@@ -14,6 +14,7 @@
   --accent-blue: #5B9BE0;
   --accent-green: #7BC47F;
   --accent-pink: #E08FB0;
+  --header-h: 68px;
   --radius: 14px;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -55,6 +56,7 @@ a {
 
 .module-layout {
   min-height: 100vh;
+  margin-top: 10px;
 }
 
 /* ---------- Header ---------- */
@@ -71,8 +73,8 @@ a {
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 68px;
+  gap: 20px;
+  height: var(--header-h);
 }
 
 .logo {
@@ -83,6 +85,7 @@ a {
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.01em;
+  flex-shrink: 0;
 }
 
 .logo svg {
@@ -92,6 +95,7 @@ a {
 nav.primary-nav {
   display: flex;
   gap: 28px;
+  margin-left: auto;
 }
 
 nav.primary-nav a {
@@ -148,6 +152,8 @@ nav.primary-nav a[data-cat="date-time"]:hover {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .mobile-nav {
@@ -304,6 +310,26 @@ nav.primary-nav a[data-cat="date-time"]:hover {
   background: var(--bg);
   border: 1px solid var(--border-strong);
   box-shadow: -14px 0 0 0 var(--bg), -14px 0 0 1px var(--border-strong);
+}
+
+.border-none {
+    border: none !important;
+}
+
+.search-textbox {
+    min-height: 35px !important;
+}
+
+.search-textbox:focus {
+    border-color: none !important;
+    box-shadow: none !important;
+    background: var(--bg-elevated) !important;
+}
+
+.search-textbox:hover {
+    border-color: none !important;
+    box-shadow: none !important;
+    background: var(--bg-elevated) !important;
 }
 
 .module-tool-card[data-cat="finance"]::before { background: var(--accent-brass); }
