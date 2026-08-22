@@ -17,8 +17,8 @@
 }
 
 .box:focus-within {
-  border-color: var(--accent-brass);
-  box-shadow: 0 0 0 3px rgba(227, 165, 66, 0.08);
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 0 3px rgba(155, 141, 232, 0.12);
 }
 
 .box input {

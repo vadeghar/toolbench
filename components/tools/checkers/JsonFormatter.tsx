@@ -62,7 +62,7 @@ export function JsonFormatter() {
 
   return (
     <div className="formatter-stack">
-      <section className="tool-panel json-panel">
+      <section className="tool-panel">
         <div className="formatter-toolbar">
           <label htmlFor="json-indent">Indent</label>
           <StyledSelect
