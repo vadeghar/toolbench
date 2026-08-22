@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import type { ToolCategory } from "@/lib/tools/types";
 
-const navItems = [
-  { label: "Calculators", href: "/finance-tools", category: "calc" },
+const navItems: { label: string; href: string; category: ToolCategory }[] = [
+  { label: "Calculators", href: "/finance-tools", category: "finance" },
   { label: "Developer Tools", href: "/dev-tools", category: "dev" },
-  { label: "Converters", href: "/converters", category: "conv" },
-  { label: "Generators", href: "/generators", category: "gen" },
-  { label: "Checkers", href: "/checkers", category: "check" },
+  { label: "Converters", href: "/converters", category: "converters" },
+  { label: "Generators", href: "/generators", category: "generators" },
+  { label: "Checkers", href: "/checkers", category: "checkers" },
 ];
 
 export function MainHeader() {

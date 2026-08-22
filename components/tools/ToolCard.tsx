@@ -5,7 +5,7 @@ export function ToolCard({ tool }: { tool: ToolDefinition }) {
 
   if (tool.status !== "active") {
     return (
-      <div className={className}>
+      <div className={className} data-cat={tool.category}>
         <h3>{tool.name}</h3>
         <p>{tool.description}</p>
         <span className="soon-badge">Coming soon</span>
@@ -14,7 +14,7 @@ export function ToolCard({ tool }: { tool: ToolDefinition }) {
   }
 
   return (
-    <a href={tool.href} className={className}>
+    <a href={tool.href} className={className} data-cat={tool.category}>
       <h3>{tool.name}</h3>
       <p>{tool.description}</p>
       <span className="tool-card-link">→ Open tool</span>
