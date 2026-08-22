@@ -3,11 +3,18 @@
 import { useState } from "react";
 
 function createUuid() {
-  return crypto.randomUUID();
+  // Avoid crypto.randomUUID() because some supported browsers/webviews do not expose it.
+  const values = new Uint8Array(16);
+  crypto.getRandomValues(values);
+  values[6] = (values[6] & 0x0f) | 0x40;
+  values[8] = (values[8] & 0x3f) | 0x80;
+
+  const hex = Array.from(values, (value) => value.toString(16).padStart(2, "0"));
+  return `${hex.slice(0, 4).join("")}-${hex.slice(4, 6).join("")}-${hex.slice(6, 8).join("")}-${hex.slice(8, 10).join("")}-${hex.slice(10, 16).join("")}`;
 }
 
 export function UuidGenerator() {
-  const [uuid, setUuid] = useState(createUuid);
+  const [uuid, setUuid] = useState(() => createUuid());
 
   return (
     <div className="calculator-stack">

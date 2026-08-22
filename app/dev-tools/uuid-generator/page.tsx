@@ -5,6 +5,8 @@ import { RelatedTools } from "@/components/tools/RelatedTools";
 import { ToolFAQ } from "@/components/tools/ToolFAQ";
 import { createToolMetadata } from "@/lib/seo/toolMetadata";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = createToolMetadata({ name: "UUID Generator", description: "Generate UUID version 4 identifiers instantly in your browser.", path: "/dev-tools/uuid-generator", keywords: ["UUID generator", "UUID v4", "GUID generator", "random UUID"] });
 
 export default function UuidGeneratorPage() {
