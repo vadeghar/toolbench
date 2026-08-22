@@ -1,46 +1,28 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { format } from "sql-formatter";
 
 const SAMPLE_SQL = "SELECT c.CustomerName, o.OrderID, o.OrderDate FROM Customers c INNER JOIN Orders o ON c.CustomerID = o.CustomerID;";
 
 function formatSql(sql: string) {
-  const normalized = sql.replace(/\r?\n/g, " ").replace(/\s+/g, " ").trim();
-  if (!normalized) return "";
+  if (!sql.trim()) return "";
 
-  const placeholders: string[] = [];
-  const protectedSql = normalized.replace(/'(?:''|[^'])*'|"(?:""|[^"])*"|`(?:``|[^`])*`/g, (value) => {
-    const index = placeholders.push(value) - 1;
-    return `__SQL_STRING_${index}__`;
-  });
-
-  let result = protectedSql;
-
-  result = result.replace(/\s*,\s*/g, ", ");
-
-  const clauses = [
-    "UNION ALL", "UNION", "SELECT", "FROM", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "OFFSET",
-  ];
-  for (const clause of clauses) {
-    const escaped = clause.replace(/ /g, "\\s+");
-    result = result.replace(new RegExp(`\\s+(${escaped})\\s+`, "gi"), "\n$1 ");
+  try {
+    return format(sql, {
+      language: "sql",
+      keywordCase: "upper",
+      tabWidth: 2,
+      useTabs: false,
+      indentStyle: "tabularLeft",
+      logicalOperatorNewline: "before",
+      expressionWidth: 1000,
+      linesBetweenQueries: 1,
+      newlineBeforeSemicolon: false,
+    }).trim();
+  } catch {
+    return "Unable to format SQL. Please check the SQL syntax and try again.";
   }
-
-  const joins = ["LEFT OUTER JOIN", "RIGHT OUTER JOIN", "FULL OUTER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL JOIN", "INNER JOIN", "CROSS JOIN", "JOIN"];
-  for (const join of joins) {
-    const escaped = join.replace(/ /g, "\\s+");
-    result = result.replace(new RegExp(`\\s+(${escaped})\\s+`, "gi"), "\n$1 ");
-  }
-
-  result = result.replace(/\s+(AND|OR)\s+/gi, "\n    $1 ");
-  result = result.replace(/\s*;\s*$/g, ";");
-  result = result.replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n").trim();
-
-  result = result.replace(/\b(select|from|where|group by|having|order by|limit|offset|union all|union|left outer join|right outer join|full outer join|left join|right join|full join|inner join|cross join|join|and|or)\b/gi, (keyword) => keyword.toUpperCase());
-
-  result = result.replace(/__SQL_STRING_(\d+)__/g, (_, index: string) => placeholders[Number(index)] ?? "");
-
-  return result.endsWith(";") ? result : `${result};`;
 }
 
 export function SqlFormatterTool() {
@@ -69,7 +51,7 @@ export function SqlFormatterTool() {
       <section className="tool-panel">
         <div className="formatter-toolbar">
           <button type="button" className="tool-button secondary" onClick={() => setInput("")}>Clear</button>
-          <button type="button" className="tool-button" onClick={copyOutput} disabled={!output}>
+          <button type="button" className="tool-button" onClick={copyOutput} disabled={!output || output.startsWith("Unable to format SQL")}> 
             {copied ? "Copied" : "Copy"}
           </button>
         </div>
