@@ -11,6 +11,9 @@
   --accent-teal: #4FB3A9;
   --accent-violet: #9B8DE8;
   --accent-coral: #E28168;
+  --accent-blue: #5B9BE0;
+  --accent-green: #7BC47F;
+  --accent-pink: #E08FB0;
   --radius: 14px;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -104,20 +107,34 @@ nav.primary-nav a:hover {
   color: var(--text-primary);
 }
 
-nav.primary-nav a[data-cat="calc"]:hover {
+/* Category → color map. Single source of truth: keep in sync with
+   lib/tools/types.ts ToolCategory. Used here (nav) and below (tool cards). */
+nav.primary-nav a[data-cat="finance"]:hover {
   border-color: var(--accent-brass);
 }
 
-nav.primary-nav a[data-cat="conv"]:hover {
+nav.primary-nav a[data-cat="converters"]:hover {
   border-color: var(--accent-coral);
 }
 
-nav.primary-nav a[data-cat="gen"]:hover {
+nav.primary-nav a[data-cat="generators"]:hover {
   border-color: var(--accent-violet);
 }
 
-nav.primary-nav a[data-cat="check"]:hover {
+nav.primary-nav a[data-cat="checkers"]:hover {
   border-color: var(--accent-teal);
+}
+
+nav.primary-nav a[data-cat="dev"]:hover {
+  border-color: var(--accent-blue);
+}
+
+nav.primary-nav a[data-cat="data"]:hover {
+  border-color: var(--accent-green);
+}
+
+nav.primary-nav a[data-cat="date-time"]:hover {
+  border-color: var(--accent-pink);
 }
 
 .menu-btn {
@@ -259,6 +276,60 @@ nav.primary-nav a[data-cat="check"]:hover {
   padding: 2px 8px;
   border-radius: 100px;
 }
+
+/* ---------- Category accent strip (tool cards) ----------
+   Base card layout (.module-tool-card position/overflow/etc.) lives in
+   ui-fixes.css; this block only owns the category color-coding, kept here
+   next to the nav color map above so both stay in sync in one place.
+   Selectors include [data-cat="..."] for specificity so these rules apply
+   reliably regardless of import order between globals.css and ui-fixes.css. */
+
+.module-tool-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+}
+
+.module-tool-card::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  box-shadow: -14px 0 0 0 var(--bg), -14px 0 0 1px var(--border-strong);
+}
+
+.module-tool-card[data-cat="finance"]::before { background: var(--accent-brass); }
+.module-tool-card[data-cat="converters"]::before { background: var(--accent-coral); }
+.module-tool-card[data-cat="generators"]::before { background: var(--accent-violet); }
+.module-tool-card[data-cat="checkers"]::before { background: var(--accent-teal); }
+.module-tool-card[data-cat="dev"]::before { background: var(--accent-blue); }
+.module-tool-card[data-cat="data"]::before { background: var(--accent-green); }
+.module-tool-card[data-cat="date-time"]::before { background: var(--accent-pink); }
+
+.module-tool-card[data-cat="finance"].active:hover { border-color: var(--accent-brass); }
+.module-tool-card[data-cat="converters"].active:hover { border-color: var(--accent-coral); }
+.module-tool-card[data-cat="generators"].active:hover { border-color: var(--accent-violet); }
+.module-tool-card[data-cat="checkers"].active:hover { border-color: var(--accent-teal); }
+.module-tool-card[data-cat="dev"].active:hover { border-color: var(--accent-blue); }
+.module-tool-card[data-cat="data"].active:hover { border-color: var(--accent-green); }
+.module-tool-card[data-cat="date-time"].active:hover { border-color: var(--accent-pink); }
+
+/* Homepage section marker dot, same color map. */
+.cat-dot[data-cat="finance"] { background: var(--accent-brass); }
+.cat-dot[data-cat="converters"] { background: var(--accent-coral); }
+.cat-dot[data-cat="generators"] { background: var(--accent-violet); }
+.cat-dot[data-cat="checkers"] { background: var(--accent-teal); }
+.cat-dot[data-cat="dev"] { background: var(--accent-blue); }
+.cat-dot[data-cat="data"] { background: var(--accent-green); }
+.cat-dot[data-cat="date-time"] { background: var(--accent-pink); }
 
 /* ---------- Footer ---------- */
 

@@ -21,7 +21,7 @@ export function HomeCatalogue(){
       const items=getToolsByCategory(category);
       return <section className="category-section" id={id} key={category}>
         <div className="wrap">
-          <div className="cat-head"><h2>{categoryLabels[category]}</h2><span className="count">{description}</span></div>
+          <div className="cat-head"><span className="cat-dot" data-cat={category}></span><h2>{categoryLabels[category]}</h2><span className="count">{description}</span></div>
           <div className="module-tool-grid">
             {items.slice(0,5).map(tool=><ToolCard key={tool.slug} tool={tool}/>)}
             {items.length>5&&<Link href={routes[category]} className="module-tool-card module-more-card"><h3>More</h3><p>Explore all {categoryLabels[category].toLowerCase()}.</p><span className="tool-card-link">→ View all</span></Link>}

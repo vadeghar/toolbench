@@ -2,7 +2,19 @@
    Single global layer for page/module/tool structure, cards, search, and every
    native form control. This replaces the old per-module CSS-module overrides
    so styling no longer depends on whether a page happens to render inside
-   ModuleLayout — every rule here is a plain, unscoped class. */
+   ModuleLayout — every rule here is a plain, unscoped class.
+
+   Division of responsibility with globals.css (avoid re-splitting these):
+   - globals.css  → site chrome (header/nav/hero/footer) + the category
+                    color map (accent variables, nav hover colors, tool-card
+                    accent strip, homepage cat-dot). Keep ALL category-color
+                    rules there so there is one place to update when adding
+                    a category.
+   - ui-fixes.css → card layout/sizing, search box, native form controls,
+                    tool panel/calculator/result layout shared across
+                    individual tool pages.
+   Category-color selectors in globals.css use [data-cat="..."] for higher
+   specificity so they win regardless of which file loads second. */
 
 /* ---------- Home hero rhythm ---------- */
 
