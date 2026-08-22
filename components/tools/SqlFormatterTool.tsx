@@ -23,16 +23,16 @@ function formatSql(sql: string) {
   ];
   for (const clause of clauses) {
     const escaped = clause.replace(/ /g, "\\s+");
-    result = result.replace(new RegExp(`\\s+(${escaped})\\s+`, "gi"), "\\n$1 ");
+    result = result.replace(new RegExp(`\\s+(${escaped})\\s+`, "gi"), "\n$1 ");
   }
 
   const joins = ["LEFT OUTER JOIN", "RIGHT OUTER JOIN", "FULL OUTER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL JOIN", "INNER JOIN", "CROSS JOIN", "JOIN"];
   for (const join of joins) {
     const escaped = join.replace(/ /g, "\\s+");
-    result = result.replace(new RegExp(`\\s+(${escaped})\\s+`, "gi"), "\\n$1 ");
+    result = result.replace(new RegExp(`\\s+(${escaped})\\s+`, "gi"), "\n$1 ");
   }
 
-  result = result.replace(/\s+(AND|OR)\s+/gi, "\\n    $1 ");
+  result = result.replace(/\s+(AND|OR)\s+/gi, "\n    $1 ");
   result = result.replace(/\s*;\s*$/g, ";");
   result = result.replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n").trim();
 
