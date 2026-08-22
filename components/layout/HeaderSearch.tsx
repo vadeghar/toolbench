@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { tools } from "@/lib/tools/registry";
-import { searchTools } from "@/lib/tools/search";
+import { tools } from "../../lib/tools/registry";
+import { searchTools } from "../../lib/tools/search";
 import styles from "./HeaderSearch.module.css";
 
 export function HeaderSearch() {
@@ -15,7 +15,6 @@ export function HeaderSearch() {
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // ⌘K / Ctrl+K focuses search from anywhere on the site; Escape closes it.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
@@ -31,7 +30,6 @@ export function HeaderSearch() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // Close the results dropdown on outside click, but not on outside touch/scroll.
   useEffect(() => {
     const onClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
